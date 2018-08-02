@@ -20,13 +20,29 @@ const clickCard = function ()  {
     activeCard = this;
     activeCard.classList.remove("hidden");
 
-    if(activeCards === 0){
+    if(activeCards.length === 0){
         activeCards[0] = activeCard;
         return;
-    }else{
-        cards.forEach(card =>{
-            card.removeEventListener("click", clickCard)
-        })
+    }
+    else{
+        cards.forEach(card => card.removeEventListener("click", clickCard))
+        activeCards[1] = activeCard;
+        setTimeout(function(){
+            if (activeCards[0].className === activeCards[1].className) {
+                console.log("won")
+                activeCards.forEach(card => {
+                    card.classList.add("off")
+                })
+
+            }
+            else {
+                console.log("lost")
+                activeCards.forEach(card => {
+                    card.classList.add("hidden")
+                })
+            }
+        }, 3000);
+    
     }
 }
 
