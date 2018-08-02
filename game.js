@@ -19,6 +19,9 @@ let gameResult = 0;
 const clickCard = function ()  { 
 
     activeCard = this;
+
+    if(activeCard == activeCards[0]) return;
+
     activeCard.classList.remove("hidden");
 
     if(activeCards.length === 0){
@@ -34,6 +37,7 @@ const clickCard = function ()  {
                 activeCards.forEach(card => card.classList.add("off")
                 )
                 gameResult++
+                cards = cards.filter(card => !card.classList.contains("off"))
                 if(gameResult == gamePairs){
 
                     const endTime = new Date().getTime();
