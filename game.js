@@ -16,7 +16,8 @@ let gameResult = 0;
 
 
 
-const clickCard = function ()  {
+const clickCard = function ()  { 
+
     activeCard = this;
     activeCard.classList.remove("hidden");
 
@@ -30,18 +31,28 @@ const clickCard = function ()  {
         setTimeout(function(){
             if (activeCards[0].className === activeCards[1].className) {
                 console.log("won")
-                activeCards.forEach(card => {
-                    card.classList.add("off")
-                })
+                activeCards.forEach(card => card.classList.add("off")
+                )
+                gameResult++
+                if(gameResult == gamePairs){
+
+                    const endTime = new Date().getTime();
+                    const gameTime = (endTime - startTime) / 1000
+                    alert(`WON, YOU Score it's ${gameTime} sekund`)
+                    location.reload();
+                }
 
             }
             else {
                 console.log("lost")
-                activeCards.forEach(card => {
-                    card.classList.add("hidden")
-                })
+                activeCards.forEach(card =>  card.classList.add("hidden"))
             }
-        }, 3000);
+            activeCard = "";
+            activeCards.length = 0;
+
+            cards.forEach(card => card.addEventListener("click", clickCard))
+        }, 1000);
+        
     
     }
 }
